@@ -54,22 +54,48 @@ if st.session_state.get("show_data", False):
     st.subheader("Dataset Information")
     st.write("Number of rows:", df.shape[0])
     st.write("Number of columns:", df.shape[1])
-    
+
+ # Create two columns
+col1, col2 = st.columns(2)
+
 # Total bicycle count by year
-yearly_data = df.groupby("year")["total"].sum().reset_index()
+with col1:
+    yearly_data = df.groupby("year")["total"].sum().reset_index()
 
-fig = px.bar(
-    yearly_data,
-    x="year",
-    y="total",
-    title="Total Bicycle Crossings by Year",
-    color_discrete_sequence=["#7B2CBF"]   # Modern purple
-)
+    fig_year = px.bar(
+        yearly_data,
+        x="year",
+        y="total",
+        title="Total Bicycle Crossings by Year",
+        color_discrete_sequence=["#7B2CBF"]
+    )
 
-fig.update_layout(
-    xaxis_title="Year",
-    yaxis_title="Number of Bicycle Crossings",
-    title_x=0.5
-)
+    fig_year.update_layout(
+        xaxis_title="Year",
+        yaxis_title="Bicycle Crossings",
+        title_x=0.5
+    )
 
-st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig_year, use_container_width=True)
+    
+# Monthly bicycle crossings
+with col2:
+    monthly_data = df.groupby("month")["total"].sum().reset_index()
+
+    fig_month = px.line(
+        monthly_data,
+        x="month",
+        y="total",
+        title="Total Bicycle Crossings by Month",
+        markers=True,
+        color_discrete_sequence=["#9D4EDD"]
+    )
+
+    fig_month.update_layout(
+        xaxis_title="Month",
+        yaxis_title="Bicycle Crossings",
+        title_x=0.5
+    )
+
+    st.plotly_chart(fig_month, use_container_width=True)
+
