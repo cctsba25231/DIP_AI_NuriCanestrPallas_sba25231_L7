@@ -55,7 +55,7 @@ if st.session_state.get("show_data", False):
     st.write("Number of rows:", df.shape[0])
     st.write("Number of columns:", df.shape[1])
 
- # Create two columns
+# Create  first two columns
 col1, col2 = st.columns(2)
 
 # Total bicycle count by year
@@ -99,3 +99,33 @@ with col2:
 
     st.plotly_chart(fig_month, use_container_width=True)
 
+# Create second two columns
+col3, col4 = st.columns(2)
+
+#East vs West comparison
+with col3:
+    sidewalk_totals = pd.DataFrame({
+        "Sidewalk": ["West Sidewalk", "East Sidewalk"],
+        "Total Crossings": [
+            df["west_sidewalk"].sum(),
+            df["east_sidewalk"].sum()
+        ]
+    })
+
+    fig_sidewalk = px.bar(
+        sidewalk_totals,
+        x="Sidewalk",
+        y="Total Crossings",
+        title="East vs West Sidewalk Crossings",
+        color="Sidewalk",
+        color_discrete_sequence=["#7B2CBF", "#C77DFF"]
+    )
+
+    fig_sidewalk.update_layout(
+        xaxis_title="Sidewalk",
+        yaxis_title="Bicycle Crossings",
+        title_x=0.5,
+        showlegend=False
+    )
+
+    st.plotly_chart(fig_sidewalk, use_container_width=True)
