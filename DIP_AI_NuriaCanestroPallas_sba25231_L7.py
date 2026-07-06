@@ -65,6 +65,29 @@ if st.session_state.get("show_data", False):
     st.write("Number of rows:", df.shape[0])
     st.write("Number of columns:", df.shape[1])
 
+# Dashboard KPIs
+total_records = len(df)
+total_crossings = df["total"].sum()
+average_hourly = round(df["total"].mean(), 1)
+busiest_year = int(df.groupby("year")["total"].sum().idxmax())
+
+kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+
+with kpi1:
+    st.metric("Total Records", f"{total_records:,}")
+
+with kpi2:
+    st.metric("Total Crossings", f"{total_crossings:,}")
+
+with kpi3:
+    st.metric("Average Hourly", average_hourly)
+
+with kpi4:
+    st.metric("Busiest Year", busiest_year)
+
+st.markdown("---")
+
+
 # Create  first two columns
 col1, col2 = st.columns(2)
 
