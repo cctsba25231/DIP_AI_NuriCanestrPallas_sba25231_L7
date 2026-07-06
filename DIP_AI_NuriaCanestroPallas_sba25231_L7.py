@@ -7,7 +7,17 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Fremont Bridge Bicycle Dashboard")
+st.markdown(
+    "<h1 style='text-align: center;'>Fremont Bridge Bicycle Dashboard</h1>",
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    "<p style='text-align: center; font-size:20px;'>Interactive dashboard exploring bicycle crossing patterns across the Fremont Bridge.</p>",
+    unsafe_allow_html=True
+)
+
+st.markdown("---")
 
 #Load Data
 df = pd.read_csv("Fremont_Bridge_Bicycle_Counter.csv")
