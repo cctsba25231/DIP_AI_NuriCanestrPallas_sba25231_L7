@@ -49,3 +49,15 @@ st.dataframe(df.head())
 st.subheader("Dataset Information")
 st.write("Number of rows:", df.shape[0])
 st.write("Number of columns:", df.shape[1])
+
+# Button to show or hide cleaned data
+if st.button("Show / Hide Cleaned Data"):
+    st.session_state["show_data"] = not st.session_state.get("show_data", False)
+
+if st.session_state.get("show_data", False):
+    st.subheader("Cleaned Data Preview")
+    st.dataframe(df.head(20))
+
+    st.subheader("Dataset Information")
+    st.write("Number of rows:", df.shape[0])
+    st.write("Number of columns:", df.shape[1])
