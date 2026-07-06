@@ -226,7 +226,6 @@ with col4:
 # Chart 5: Heatmap by Day and Hour
 # The heatmap shows when cycling activity is highest during the week.
 # It combines day of the weel and hour of the day.
-st.subheader("Busiest Times to Cycle")
 
 # Group the data by day and hour, then add the total crossings
 heatmap_data = (
@@ -259,6 +258,7 @@ heatmap_pivot = heatmap_data.pivot(
 # Darker purple means higher bicycle activity
 fig_heatmap = px.imshow(
     heatmap_pivot,
+    title="Bicycle Crossings by Day and Hour",
     color_continuous_scale="Purples"
 )
 
@@ -273,7 +273,6 @@ fig_heatmap.update_layout(
 st.plotly_chart(fig_heatmap, use_container_width=True)
 
 # Chart 6: Average Montly Bicycle Activity
-st.subheader("Average Monthly Bicycle Activity")
 
 # Group the data by month and calculate the average crossings for each month
 monthly_average = (
@@ -287,6 +286,7 @@ fig_area = px.area(
     monthly_average,
     x="month",
     y="total",
+    title="Average Bicycle Crossings by Month",
     color_discrete_sequence=["#9D4EDD"]
 )
 
