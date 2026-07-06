@@ -188,8 +188,6 @@ with col4:
 
     st.plotly_chart(fig_hour, use_container_width=True)
     
-# Create Third two columns
-col5, col6 = st.columns(2)
 
 # Heatmap: which days and hours are the busiest
 st.subheader("Busiest Times to Cycle")
@@ -231,3 +229,27 @@ fig_heatmap.update_layout(
 
 st.plotly_chart(fig_heatmap, use_container_width=True)
 
+#Area Chart
+st.subheader("Average Monthly Bicycle Activity")
+
+monthly_average = (
+    df.groupby("month")["total"]
+    .mean()
+    .reset_index()
+)
+
+fig_area = px.area(
+    monthly_average,
+    x="month",
+    y="total",
+    title="Average Bicycle Crossings by Month",
+    color_discrete_sequence=["#9D4EDD"]
+)
+
+fig_area.update_layout(
+    xaxis_title="Month",
+    yaxis_title="Average Bicycle Crossings",
+    title_x=0.5
+)
+
+st.plotly_chart(fig_area, use_container_width=True)
