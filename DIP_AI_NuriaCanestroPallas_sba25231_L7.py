@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 st.set_page_config(
     page_title="Fremont Bridge Bicycle Dashboard",
@@ -54,13 +55,21 @@ if st.session_state.get("show_data", False):
     st.write("Number of rows:", df.shape[0])
     st.write("Number of columns:", df.shape[1])
     
-# Create total bicycle count by year
+# Total bicycle count by year
 yearly_data = df.groupby("year")["total"].sum().reset_index()
 
-st.subheader("Total Bicycle Crossings by Year")
-
-st.bar_chart(
-    data=yearly_data,
+fig = px.bar(
+    yearly_data,
     x="year",
-    y="total"
+    y="total",
+    title="Total Bicycle Crossings by Year",
+    color_discrete_sequence=["#7B2CBF"]   # Modern purple
 )
+
+fig.update_layout(
+    xaxis_title="Year",
+    yaxis_title="Number of Bicycle Crossings",
+    title_x=0.5
+)
+
+st.plotly_chart(fig, use_container_width=True)
