@@ -53,3 +53,14 @@ if st.session_state.get("show_data", False):
     st.subheader("Dataset Information")
     st.write("Number of rows:", df.shape[0])
     st.write("Number of columns:", df.shape[1])
+    
+# Create total bicycle count by year
+yearly_data = df.groupby("year")["total"].sum().reset_index()
+
+st.subheader("Total Bicycle Crossings by Year")
+
+st.bar_chart(
+    data=yearly_data,
+    x="year",
+    y="total"
+)
