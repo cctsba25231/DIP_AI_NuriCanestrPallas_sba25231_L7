@@ -187,3 +187,47 @@ with col4:
     )
 
     st.plotly_chart(fig_hour, use_container_width=True)
+    
+# Create Third two columns
+col5, col6 = st.columns(2)
+
+# Heatmap: which days and hours are the busiest
+st.subheader("Busiest Times to Cycle")
+
+heatmap_data = (
+    df.groupby(["day_name", "hour"])["total"]
+    .sum()
+    .reset_index()
+)
+
+day_order = [
+    "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday", "Sunday"
+]
+
+heatmap_data["day_name"] = pd.Categorical(
+    heatmap_data["day_name"],
+    categories=day_order,
+    ordered=True
+)
+
+heatmap_pivot = heatmap_data.pivot(
+    index="day_name",
+    columns="hour",
+    values="total"
+)
+
+fig_heatmap = px.imshow(
+    heatmap_pivot,
+    title="Bicycle Crossings by Day and Hour",
+    color_continuous_scale="Purples"
+)
+
+fig_heatmap.update_layout(
+    xaxis_title="Hour of Day",
+    yaxis_title="Day of Week",
+    title_x=0.5
+)
+
+st.plotly_chart(fig_heatmap, use_container_width=True)
+
