@@ -9,7 +9,7 @@ st.set_page_config(
 st.title("Fremont Bridge Bicycle Dashboard")
 
 #Load Data
-df = pd.read_csv("Fremont_Bridge_Bycle_counter.csv")
+df = pd.read_csv("Fremont_Bridge_Bycle_Counter.csv")
 
 #Rename columns to make them easier to use
 df=df.rename(columns={
