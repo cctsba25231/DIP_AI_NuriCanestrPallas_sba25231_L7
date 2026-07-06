@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# Tittle and subtitle
 st.set_page_config(
     page_title="Fremont Bridge Bicycle Dashboard",
     layout="wide"
@@ -54,7 +55,7 @@ df["hour"] = df["date"].dt.hour
 df["day_name"] = df["date"].dt.day_name()
 
 # Button to show or hide cleaned data
-if st.button("Show / Hide Cleaned Data"):
+if st.button("Show / Hide Data"):
     st.session_state["show_data"] = not st.session_state.get("show_data", False)
 
 if st.session_state.get("show_data", False):
