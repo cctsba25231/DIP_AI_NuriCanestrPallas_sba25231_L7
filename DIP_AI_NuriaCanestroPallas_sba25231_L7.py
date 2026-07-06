@@ -259,7 +259,6 @@ heatmap_pivot = heatmap_data.pivot(
 # Darker purple means higher bicycle activity
 fig_heatmap = px.imshow(
     heatmap_pivot,
-    title="Bicycle Crossings by Day and Hour",
     color_continuous_scale="Purples"
 )
 
@@ -288,7 +287,6 @@ fig_area = px.area(
     monthly_average,
     x="month",
     y="total",
-    title="Average Bicycle Crossings by Month",
     color_discrete_sequence=["#9D4EDD"]
 )
 
