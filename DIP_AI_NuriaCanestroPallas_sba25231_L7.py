@@ -129,3 +129,35 @@ with col3:
     )
 
     st.plotly_chart(fig_sidewalk, use_container_width=True)
+    
+#Bicycle crossings by day of the week
+with col4:
+
+    # Order the days correctly
+    day_order = [
+        "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday", "Sunday"
+    ]
+
+    daily_data = (
+        df.groupby("day_name")["total"]
+        .sum()
+        .reindex(day_order)
+        .reset_index()
+    )
+
+    fig_day = px.bar(
+        daily_data,
+        x="day_name",
+        y="total",
+        title="Bicycle Crossings by Day of the Week",
+        color_discrete_sequence=["#9D4EDD"]
+    )
+
+    fig_day.update_layout(
+        xaxis_title="Day of the Week",
+        yaxis_title="Bicycle Crossings",
+        title_x=0.5
+    )
+
+    st.plotly_chart(fig_day, use_container_width=True)
