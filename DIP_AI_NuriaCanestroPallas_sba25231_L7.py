@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(
-    page_title="Freemont Bridge Bicycle Dashboard"
+    page_title="Fremont Bridge Bicycle Dashboard",
     layout="wide"
 )
 
-st.title("Freemont Bridge Bicycle Dashboard")
+st.title("Fremont Bridge Bicycle Dashboard")
 
 #Load Data
-df = pd.read_csv("Freemont_Bridge_Bycle_counter.csv")
+df = pd.read_csv("Fremont_Bridge_Bycle_counter.csv")
 
 #Rename columns to make them easier to use
 df=df.rename(columns={
